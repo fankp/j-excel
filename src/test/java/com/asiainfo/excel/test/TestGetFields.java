@@ -29,7 +29,12 @@ public class TestGetFields extends TestCase {
         user.setUserName("fankp");
         user.setUserPwd("fankp");
         users.add(user);
-        JExcelService jExcelService = new JExcelService("sheet2", JSON.toJSONString(users), User.class);
-        jExcelService.createExcel("data/test.xls");
+        JExcelService jExcelService = new JExcelService("sheet2", User.class);
+        jExcelService.createExcel("data/test.xls",JSON.toJSONString(users));
+    }
+    public void testReadExcelData() throws Exception{
+        JExcelService jExcelService = new JExcelService<User>("sheet2", User.class);
+        List<User> users = jExcelService.readExcel("data/test.xls");
+        System.out.println(users);
     }
 }
